@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -9,6 +11,7 @@ export class Tab1Page {
 
   constructor(
     private navCtrl: NavController,
+    private http: HttpClient
   ) {}
     
   navToSaved() {

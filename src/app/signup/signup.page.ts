@@ -1,25 +1,53 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
-
+import { Component } from '@angular/core';
+import {NavController} from '@ionic/angular';
+import {HttpClient} from "@angular/common/http";
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-signup',
-  templateUrl: './signup.page.html',
-  styleUrls: ['./signup.page.scss'],
+  templateUrl: 'signup.page.html',
+  styleUrls: ['signup.page.scss'],
 })
-export class SignupPage implements OnInit {
+export class SignupPage { 
+  public user: any = {
+    name: "",
+    email: "",
+    password:"" 
+  };
 
   constructor(
-    private navCtrl: NavController) 
-    { }
+    private httpClient: HttpClient,
+    private alertcontroller: AlertController,
+    private navCtrl: NavController
+   ) {}
 
+   navToLogin() {
+    console.log("Submitting")
+    console.log(this.user);    
+  
+    this.httpClient
+    .post("http://localhost:3000/api/users",this.user)
+    .subscribe(
+      (response) => {
+        console.log(response);
+        this.navCtrl.navigateForward('tabs');
+      },
+      async (err) => {
+        console.log(err);
+        const alert = await this.alertcontroller.create({
+          header: 'Alert',
+          subHeader: 'Email Error',
+          message: 'This email has already been used',
+          buttons: ['ok']
+        });
+        return await alert.present();
+           
+    }
+    
+    );
+
+  }
   ngOnInit() {
   }
 
-  navToProfile() {
-    this.navCtrl.navigateForward('tabs');
-  }
-
-  navToLogin() {
-    this.navCtrl.navigateForward('');
-  }
+  
 }

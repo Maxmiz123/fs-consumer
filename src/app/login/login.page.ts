@@ -21,5 +21,8 @@ export class LoginPage implements OnInit {
   navToSignup() {
     this.navCtrl.navigateForward('signup');
   }
+  navToRegister(){
+    this.navCtrl.navigateForward('signup');
+  }
 
 }
