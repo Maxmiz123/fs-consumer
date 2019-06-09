@@ -29,9 +29,18 @@
                 <p>Or sign in manually:</p>
               </div>
       
-              <input type="text" name="username" placeholder="Username" required>
-              <input type="password" name="password" placeholder="Password" required>
-              <ion-button size="medium" expand="full" (click)="navToProfile()">Login</ion-button>
+              <ion-item>
+                <label>Email</label>
+                <ion-input [(ngModel)] = "this.email" name ="email" ></ion-input>
+              </ion-item>
+          
+              <ion-item>
+                <label> Password </label>
+                <ion-input [(ngModel)] = "this.password" name = "password"></ion-input>
+              </ion-item>
+          
+            <ion-button expand ="full" (click) = "login()" >Login</ion-button>
+
               <ion-button size="large" (click)="navToRegister()" expand="block">Register</ion-button>
             </div>
       
